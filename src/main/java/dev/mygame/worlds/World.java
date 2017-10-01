@@ -11,11 +11,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
 import dev.mygame.tiles.Tile;
+import dev.mygame.utils.Utils;
 
 public class World
 {
 	private int width;
 	private int height;
+	private int spawnX;
+	private int spawnY;
 	
 	private int[][] grid;
 	
@@ -53,91 +56,39 @@ public class World
 		return tile;
 	}
 	
+	public int getSpawnX()
+	{
+		return spawnX;
+	}
+	
+	public int getSpawnY()
+	{
+		return spawnY;
+	}
+	
 	private void loadWorld(String path)
 	{
-		JSONParser parser = new JSONParser();
 		JSONArray map = null;
 
 		try
 		{
 			File jsonFile = Paths.get(World.class.getResource(path).toURI()).toFile();
 		
-			System.out.println(jsonFile.getAbsolutePath().toString());
-			Object obj = parser.parse(new FileReader(jsonFile));
-			
-			System.out.println(null == obj);
+			//System.out.println(jsonFile.getAbsolutePath().toString());
 		
-			JSONObject jsonObject = (JSONObject) obj;
+			JSONObject jsonObject = (JSONObject) new JSONParser().parse(new FileReader(jsonFile));
 			
 			// load array of Strings
 			map = (JSONArray) jsonObject.get("map");
 			this.width = ((Long)jsonObject.get("width")).intValue();
 			this.height = ((Long)jsonObject.get("height")).intValue();
-			/*
-			for(Object mapElement : map)
-			{
-				System.out.println((String) mapElement);
-			}*/
+			this.spawnX = ((Long)jsonObject.get("spawnX")).intValue();
+			this.spawnY = ((Long)jsonObject.get("spawnY")).intValue();
+			
 		} catch (Exception e)
 		{
 			System.out.println(e);
 		}
-		
-		// TODO: follow up from 2017.09.23 - map is now loaded
-		// TODO: move on to next Java Game tutorial
-		// Next is to convert these arrays to a 2d array of integers
-		
-		//System.out.println(Arrays.toString(map));
-		
-		//this.width = 5;
-		//this.height = 5;
-		//grid = new int[height][width];
-		/* 
-		* grid might look like, we access height first, 
-		* followed by position in each array (width)
-		* 0: XXXXX
-		* 1: X   X
-		* 2: XXXXX
-		*/
-
-		/*
-		for(int y = 0; y < height; y++)
-		{
-			for(int x = 0; x < width; x++)
-			{
-				grid[y][x] = 0;
-			}
-		}
-		*/
-		grid = convertJsonArrayTo2dIntegerMap(map);
-	}
-	
-	private int[][] convertJsonArrayTo2dIntegerMap(JSONArray mapIn)
-	{
-		// call length method on String, and size method
-		// on JSONArray (child of ArrayList)
-		//this.width = ((String)mapIn.get(0)).length();
-		//this.height = mapIn.size();
-		
-		int[][] toReturn = new int[height][width];
-		
-		System.out.println("convertJsonArrayTo2dIntegerMap()");
-		for(int y = 0; y < height; y++)
-		{
-			String row = (String)mapIn.get(y);
-			
-			for(int x = 0; x < width; x++)
-			{
-				char tileId = row.charAt(x);
-				System.out.print(tileId);
-				// char needs to be converted to int
-				toReturn[y][x] = Character.getNumericValue(row.charAt(x));
-			}
-			System.out.println();
-		}
-		
-		//System.out.println(Arrays.deepToString(toReturn));
-		
-		return toReturn;
+		grid = Utils.convertJsonArrayTo2dIntArray(map, width, height);
 	}
 }

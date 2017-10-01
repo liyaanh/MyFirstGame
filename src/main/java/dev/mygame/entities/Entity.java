@@ -11,6 +11,7 @@ public abstract class Entity
 	{
 		this.x = x;
 		this.y = y;
+		System.out.println("X : " + x + "\nY : " + y);
 		this.width = width;
 		this.height = height;
 	}

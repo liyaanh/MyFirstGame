@@ -15,8 +15,8 @@ public class GameState extends State
 	public GameState(Game game)
 	{
 		super(game);
-		player = new Player(game, 100f, 100f);
 		world = new World("/maps/World1.json");
+		player = new Player(game, world.getSpawnX(), world.getSpawnY());
 	}
 	
 	@Override
