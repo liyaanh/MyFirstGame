@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import dev.mygame.input.KeyManager;
+import dev.mygame.display.Camera;
 
 public class Game implements Runnable
 {
@@ -25,7 +26,6 @@ public class Game implements Runnable
     private BufferStrategy bs;
     private Graphics g;
 
-
     private int x;
     private int y;
 	
@@ -38,6 +38,8 @@ public class Game implements Runnable
 	private State gameState;
 	
 	private KeyManager keyManager;
+	
+	private Camera camera;
 
     public Game(String title, int width, int height)
     {
@@ -45,6 +47,7 @@ public class Game implements Runnable
         this.height = height;
         this.title = title;
 		keyManager = new KeyManager();
+		camera = new Camera(0, 0, width, height);
     }
 
     private void init()
@@ -195,5 +198,10 @@ public class Game implements Runnable
 	public KeyManager getKeyManager()
 	{
 		return keyManager;
+	}
+	
+	public Camera getCamera()
+	{
+		return camera;
 	}
 }

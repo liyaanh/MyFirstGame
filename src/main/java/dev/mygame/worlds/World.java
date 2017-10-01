@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 
 import dev.mygame.tiles.Tile;
 import dev.mygame.utils.Utils;
+import dev.mygame.Game;
 
 public class World
 {
@@ -19,11 +20,13 @@ public class World
 	private int height;
 	private int spawnX;
 	private int spawnY;
+	private Game game;
 	
 	private int[][] grid;
 	
-	public World(String path)
+	public World(Game game, String path)
 	{
+		this.game = game;
 		loadWorld(path);
 	}
 	
@@ -39,9 +42,10 @@ public class World
 			for(int x = 0; x < width; x++)
 			{
 				Tile t = getTile(x, y);
+				System.out.println("CamX : " + game.getCamera().getX() + " CamY : " + game.getCamera().getY());
 				// currently, getTile is returning a default tile piece
 				// not the correct tile at id position...
-				t.render(g, x * t.WIDTH, y * t.HEIGHT);
+				t.render(g, x * t.WIDTH - game.getCamera().getX(), y * t.HEIGHT - game.getCamera().getY());
 			}
 		}
 	}

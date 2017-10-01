@@ -2,13 +2,18 @@ package dev.mygame.entities;
 
 import java.awt.Graphics;
 
+import dev.mygame.Game;
+
 public abstract class Entity
 {
 	protected float x, y;
 	protected int width, height;
 	
-	public Entity(float x, float y, int width, int height)
+	protected Game game;
+	
+	public Entity(Game game, float x, float y, int width, int height)
 	{
+		this.game = game;
 		this.x = x;
 		this.y = y;
 		System.out.println("X : " + x + "\nY : " + y);

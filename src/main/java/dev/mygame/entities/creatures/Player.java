@@ -11,7 +11,7 @@ public class Player extends Creature
 	
 	public Player(Game game, float x, float y)
 	{
-		super(x, y, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGHT);
+		super(game, x, y, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGHT);
 		this.game = game;
 	}
 	
@@ -48,6 +48,6 @@ public class Player extends Creature
 	@Override
 	public void render(Graphics g)
 	{
-		g.drawImage(Assets.playerOne, (int) x, (int) y, width, height, null);
+		g.drawImage(Assets.playerOne, (int) x - game.getCamera().getX(), (int) y - game.getCamera().getY(), width, height, null);
 	}
 }
