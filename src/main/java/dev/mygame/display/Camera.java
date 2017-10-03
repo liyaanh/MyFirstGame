@@ -53,8 +53,14 @@ public class Camera
 		return focusY;
 	}
 	
-	public void setFocusY(int focusY)
+	public int getWidth()
 	{
+		return w;
+	}
+	
+	public int getHeight()
+	{
+		return h;
 	}
 	
 	public void tick()

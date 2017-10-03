@@ -37,17 +37,47 @@ public class World
 	
 	public void render(Graphics g)
 	{
+		int tilesRendered = 0;
 		for(int y = 0; y < height; y++)
 		{
 			for(int x = 0; x < width; x++)
 			{
 				Tile t = getTile(x, y);
-				System.out.println("CamX : " + game.getCamera().getX() + " CamY : " + game.getCamera().getY());
+				//System.out.println("CamX : " + game.getCamera().getX() + " CamY : " + game.getCamera().getY());
 				// currently, getTile is returning a default tile piece
 				// not the correct tile at id position...
-				t.render(g, x * t.WIDTH - game.getCamera().getX(), y * t.HEIGHT - game.getCamera().getY());
+				if(renderHelper(x, y, t.WIDTH, t.HEIGHT))
+				{
+					t.render(g, x * t.WIDTH - game.getCamera().getX(), y * t.HEIGHT - game.getCamera().getY());
+					tilesRendered++;
+				}
 			}
 		}
+		System.out.println("Tiles rendered: " + tilesRendered + "/" + grid[0].length * grid.length);
+	}
+	
+	public boolean renderHelper(int x, int y, int w, int h)
+	{
+		// left
+		if((x + 1) * w > game.getCamera().getX() 
+			&& (x - 1) * w + w < game.getCamera().getX() + game.getCamera().getWidth()
+			&& (y + 1) * h > game.getCamera().getY() 
+			&& (y - 1) * h + h < game.getCamera().getY() + game.getCamera().getHeight())
+		{
+			return true;
+		}
+		// right
+		// up
+		// down
+		
+		
+		return false;
+	}
+	
+	public boolean coordinatePrinter(int coord, int camCoord)
+	{
+		
+		return true;
 	}
 	
 	public Tile getTile(int x, int y)
