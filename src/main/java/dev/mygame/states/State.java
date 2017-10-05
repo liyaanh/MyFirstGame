@@ -1,7 +1,7 @@
 package dev.mygame.states;
 
 import java.awt.Graphics;
-import dev.mygame.Game;
+import dev.mygame.Handler;
 
 public abstract class State
 {
@@ -17,11 +17,11 @@ public abstract class State
 		return currentState;
 	}
 	
-	protected Game game;
+	protected Handler handler;
 	
-	public State(Game game)
+	public State(Handler handler)
 	{
-		this.game = game;
+		this.handler = handler;
 	}
 	
 	//

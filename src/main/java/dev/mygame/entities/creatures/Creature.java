@@ -1,12 +1,12 @@
 package dev.mygame.entities.creatures;
 
 import dev.mygame.entities.Entity;
-import dev.mygame.Game;
+import dev.mygame.Handler;
 
 public abstract class Creature extends Entity
 {
 	public static final int DEFAULT_HEALTH = 10;
-	public static final float DEFAULT_SPEED = 3.0f;
+	public static final float DEFAULT_SPEED = 1.0f;
 	public static final int DEFAULT_WIDTH = 64;
 	public static final int DEFAULT_HEIGHT = 64;
 	
@@ -15,9 +15,9 @@ public abstract class Creature extends Entity
 	protected float xMove;
 	protected float yMove;
 	
-	public Creature(Game game, float x, float y, int width, int height)
+	public Creature(Handler handler, float x, float y, int width, int height)
 	{
-		super(game, x, y, width, height);
+		super(handler, x, y, width, height);
 		health = DEFAULT_HEALTH;
 		speed = DEFAULT_SPEED;
 		xMove = 0f;

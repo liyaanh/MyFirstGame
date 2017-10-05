@@ -40,6 +40,8 @@ public class Game implements Runnable
 	private KeyManager keyManager;
 	
 	private Camera camera;
+	
+	private Handler handler;
 
     public Game(String title, int width, int height)
     {
@@ -47,7 +49,6 @@ public class Game implements Runnable
         this.height = height;
         this.title = title;
 		keyManager = new KeyManager();
-		camera = new Camera(0, 0, width, height);
     }
 
     private void init()
@@ -56,8 +57,11 @@ public class Game implements Runnable
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		
-		menuState = new MenuState(this);
-		gameState = new GameState(this);
+		camera = new Camera(0, 0, width, height);
+		handler = new Handler(this);
+		
+		menuState = new MenuState(handler);
+		gameState = new GameState(handler);
 		State.setState(menuState);
 	}
 
@@ -203,5 +207,15 @@ public class Game implements Runnable
 	public Camera getCamera()
 	{
 		return camera;
+	}
+	
+	public int getWidth()
+	{
+		return width;
+	}
+	
+	public int getHeight()
+	{
+		return height;
 	}
 }

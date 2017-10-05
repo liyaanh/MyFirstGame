@@ -3,16 +3,13 @@ package dev.mygame.entities.creatures;
 import java.awt.Graphics;
 
 import dev.mygame.gfx.Assets;
-import dev.mygame.Game;
+import dev.mygame.Handler;
 
 public class Player extends Creature
-{
-	private Game game;
-	
-	public Player(Game game, float x, float y)
+{	
+	public Player(Handler handler, float x, float y)
 	{
-		super(game, x, y, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGHT);
-		this.game = game;
+		super(handler, x, y, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGHT);
 	}
 	
 	@Override
@@ -27,19 +24,19 @@ public class Player extends Creature
 		xMove = 0;
 		yMove = 0;
 		
-		if(game.getKeyManager().up)
+		if(handler.getKeyManager().up)
 		{
 			yMove = -speed;
 		}
-		if(game.getKeyManager().down)
+		if(handler.getKeyManager().down)
 		{
 			yMove = +speed;
 		}
-		if(game.getKeyManager().left)
+		if(handler.getKeyManager().left)
 		{
 			xMove = -speed;
 		}
-		if(game.getKeyManager().right)
+		if(handler.getKeyManager().right)
 		{
 			xMove = +speed;
 		}
@@ -48,6 +45,6 @@ public class Player extends Creature
 	@Override
 	public void render(Graphics g)
 	{
-		g.drawImage(Assets.playerOne, (int) x - game.getCamera().getX(), (int) y - game.getCamera().getY(), width, height, null);
+		g.drawImage(Assets.playerOne, (int)(x - handler.getCamera().getX()), (int)(y - handler.getCamera().getY()), width, height, null);
 	}
 }

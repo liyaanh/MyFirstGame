@@ -12,7 +12,7 @@ import org.json.simple.parser.JSONParser;
 
 import dev.mygame.tiles.Tile;
 import dev.mygame.utils.Utils;
-import dev.mygame.Game;
+import dev.mygame.Handler;
 
 public class World
 {
@@ -20,13 +20,13 @@ public class World
 	private int height;
 	private int spawnX;
 	private int spawnY;
-	private Game game;
+	private Handler handler;
 	
 	private int[][] grid;
 	
-	public World(Game game, String path)
+	public World(Handler handler, String path)
 	{
-		this.game = game;
+		this.handler = handler;
 		loadWorld(path);
 	}
 	
@@ -43,35 +43,40 @@ public class World
 			for(int x = 0; x < width; x++)
 			{
 				Tile t = getTile(x, y);
-				//System.out.println("CamX : " + game.getCamera().getX() + " CamY : " + game.getCamera().getY());
+				//System.out.println("CamX : " + handler.getCamera().getX() + " CamY : " + handler.getCamera().getY());
 				// currently, getTile is returning a default tile piece
 				// not the correct tile at id position...
-				if(renderHelper(x, y, t.WIDTH, t.HEIGHT))
+				if(!cullTile(x, y, t.WIDTH, t.HEIGHT))
 				{
-					t.render(g, x * t.WIDTH - game.getCamera().getX(), y * t.HEIGHT - game.getCamera().getY());
+					t.render(g, (int)(x * t.WIDTH - handler.getCamera().getX()), (int)(y * t.HEIGHT - handler.getCamera().getY()));
 					tilesRendered++;
 				}
 			}
 		}
-		System.out.println("Tiles rendered: " + tilesRendered + "/" + grid[0].length * grid.length);
+		//System.out.println("Tiles rendered: " + tilesRendered + "/" + grid[0].length * grid.length);
 	}
 	
-	public boolean renderHelper(int x, int y, int w, int h)
+	public boolean cullTile(int x, int y, int w, int h)
 	{
 		// left
-		if((x + 1) * w > game.getCamera().getX() 
-			&& (x - 1) * w + w < game.getCamera().getX() + game.getCamera().getWidth()
-			&& (y + 1) * h > game.getCamera().getY() 
-			&& (y - 1) * h + h < game.getCamera().getY() + game.getCamera().getHeight())
+		//if((x + 1) * w > handler.getCamera().getX() 
+		//	&& (x - 1) * w + w < handler.getCamera().getX() + handler.getCamera().getWidth()
+		//	&& (y + 1) * h > handler.getCamera().getY() 
+		//	&& (y - 1) * h + h < handler.getCamera().getY() + handler.getCamera().getHeight())
+		//{
+		if((x + 1) > handler.getCamera().getX() / w
+			&& (x) < (handler.getCamera().getX() + handler.getCamera().getWidth()) / w
+			&& (y + 1) > handler.getCamera().getY() / h
+			&& (y) < (handler.getCamera().getY() + handler.getCamera().getHeight()) / h)
 		{
-			return true;
+			return false;
 		}
 		// right
 		// up
 		// down
 		
 		
-		return false;
+		return true;
 	}
 	
 	public boolean coordinatePrinter(int coord, int camCoord)

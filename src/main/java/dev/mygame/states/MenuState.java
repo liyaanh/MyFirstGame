@@ -3,13 +3,13 @@ package dev.mygame.states;
 import java.awt.Graphics;
 
 import dev.mygame.gfx.Assets;
-import dev.mygame.Game;
+import dev.mygame.Handler;
 
 public class MenuState extends State
 {
-	public MenuState(Game game)
+	public MenuState(Handler handler)
 	{
-		super(game);
+		super(handler);
 	}
 	
 	@Override

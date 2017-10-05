@@ -2,14 +2,14 @@ package dev.mygame.display;
 
 public class Camera
 {
-	private int x;
-	private int y;
+	private float x;
+	private float y;
 	private int w;
 	private int h;
 	private int focusX;
 	private int focusY;
 	
-	public Camera(int x, int y, int w, int h)
+	public Camera(float x, float y, int w, int h)
 	{
 		this.x = x;
 		this.y = y;
@@ -17,22 +17,22 @@ public class Camera
 		this.h = h;
 	}
 	
-	public int getX()
+	public float getX()
 	{
 		return x;
 	}
 	
-	public void setX(int x)
+	public void setX(float x)
 	{
 		this.x = x;
 	}
 	
-	public int getY()
+	public float getY()
 	{
 		return y;
 	}
 	
-	public void setY(int y)
+	public void setY(float y)
 	{
 		this.y = y;
 	}
@@ -42,10 +42,11 @@ public class Camera
 		return focusX;
 	}
 	
-	public void setFocus(int focusX, int focusY)
+	public void setFocus(float focusX, float focusY)
 	{
-		this.x = focusX - w/2;
-		this.y = focusY - h/2;
+		float lerp = 1.0f;
+		x += lerp * (focusX - w/2 - x);
+		y += lerp * (focusY - h/2 - y);
 	}
 	
 	public int getFocusY()

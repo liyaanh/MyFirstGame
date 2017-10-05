@@ -1,6 +1,7 @@
 import org.junit.*;
 
 import dev.mygame.Game;
+import dev.mygame.Handler;
 import dev.mygame.entities.creatures.Player;
 
 public class PlayerTest
@@ -10,7 +11,7 @@ public class PlayerTest
 	@Before
 	public void setup()
 	{
-		p = new Player(new Game("", 0, 0), 0, 0);
+		p = new Player(new Handler(new Game("", 0, 0)), 0, 0);
 	}
 	
 	@Test

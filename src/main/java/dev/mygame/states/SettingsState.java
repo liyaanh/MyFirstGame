@@ -1,13 +1,13 @@
 package dev.mygame.states;
 
 import java.awt.Graphics;
-import dev.mygame.Game;
+import dev.mygame.Handler;
 
 public class SettingsState extends State
 {
-	public SettingsState(Game game)
+	public SettingsState(Handler handler)
 	{
-		super(game);
+		super(handler);
 	}
 	
 	@Override
