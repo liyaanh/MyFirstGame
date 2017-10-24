@@ -16,7 +16,7 @@ public abstract class Entity
 		this.handler = handler;
 		this.x = x;
 		this.y = y;
-		System.out.println("X : " + x + "\nY : " + y);
+		//System.out.println("X : " + x + "\nY : " + y);
 		this.width = width;
 		this.height = height;
 	}
@@ -41,7 +41,7 @@ public abstract class Entity
 		this.y = y;
 	}
 	
-	public float getWidth()
+	public int getWidth()
 	{
 		return width;
 	}
@@ -51,7 +51,7 @@ public abstract class Entity
 		this.width = width;
 	}
 	
-	public float getHeight()
+	public int getHeight()
 	{
 		return height;
 	}

@@ -1,5 +1,7 @@
 package dev.mygame.display;
 
+import dev.mygame.entities.Entity;
+
 public class Camera
 {
 	private float x;
@@ -42,11 +44,12 @@ public class Camera
 		return focusX;
 	}
 	
-	public void setFocus(float focusX, float focusY)
+	public void setFocus(Entity e)
 	{
 		float lerp = 1.0f;
-		x += lerp * (focusX - w/2 - x);
-		y += lerp * (focusY - h/2 - y);
+		x = lerp * (e.getX() + e.getWidth()/2 - w/2);
+		y = lerp * (e.getY() + e.getHeight()/2 - h/2);
+		//System.out.println("X :" + x + "\tY :" + y);
 	}
 	
 	public int getFocusY()
@@ -62,15 +65,5 @@ public class Camera
 	public int getHeight()
 	{
 		return h;
-	}
-	
-	public void tick()
-	{
-		// centre the camera on the focus point
-		//focusX -= w/2;
-		//focusY -= h/2;
-		// set the origin so we can offset everything else
-		x = focusX;
-		y = focusY;
 	}
 }

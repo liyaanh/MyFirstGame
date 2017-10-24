@@ -1,3 +1,5 @@
+package dev.mygame.entities.creatures;
+
 import org.junit.*;
 
 import dev.mygame.Game;
@@ -14,7 +16,7 @@ public class PlayerTest
 		p = new Player(new Handler(new Game("", 0, 0)), 0, 0);
 	}
 	
-	@Test
+	//@Test
 	public void testMove()
 	{
 		p.setXMove(3);
@@ -26,7 +28,7 @@ public class PlayerTest
 		Assert.assertEquals(3.0f, p.getY(), 1.0f);
 	}
 	
-	@Test
+	//@Test
 	public void testMove2()
 	{
 		p.setXMove(6);

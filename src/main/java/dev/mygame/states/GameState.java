@@ -25,7 +25,7 @@ public class GameState extends State
 	public void tick()
 	{
 		player.tick();
-		handler.getCamera().setFocus(player.getX() + player.getWidth()/2, player.getY() + player.getHeight()/2);
+		handler.getCamera().setFocus(player);
 	}
 	
 	@Override

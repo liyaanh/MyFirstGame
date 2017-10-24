@@ -130,4 +130,14 @@ public class World
 		}
 		grid = Utils.convertJsonArrayTo2dIntArray(map, width, height);
 	}
+	
+	public int getWidth()
+	{
+		return width;
+	}
+	
+	public int getHeight()
+	{
+		return height;
+	}
 }
